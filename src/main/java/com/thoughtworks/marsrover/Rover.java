@@ -5,50 +5,50 @@ import java.util.Objects;
 public class Rover {
     private final int x;
     private final int y;
-    private final Direction direction;
+    private final Direction facing;
 
-    public Rover(final int x, final int y, final Direction direction) {
+    public Rover(final int x, final int y, final Direction facing) {
         this.x = x;
         this.y = y;
-        this.direction = direction;
+        this.facing = facing;
     }
 
     public Rover forward() {
-        switch (this.direction) {
-            case N:
-                return new Rover(this.x, this.y + 1, this.direction);
-            case S:
-                return new Rover(this.x, this.y - 1, this.direction);
-            case E:
-                return new Rover(this.x + 1, this.y, this.direction);
+        switch (this.facing) {
+            case NORTH:
+                return new Rover(this.x, this.y + 1, this.facing);
+            case SOUTH:
+                return new Rover(this.x, this.y - 1, this.facing);
+            case EAST:
+                return new Rover(this.x + 1, this.y, this.facing);
             default:
-                return new Rover(this.x - 1, this.y, this.direction);
+                return new Rover(this.x - 1, this.y, this.facing);
         }
     }
 
-    public Rover left() {
-        switch (this.direction) {
-            case N:
-                return new Rover(this.x, this.y, Direction.W);
-            case W:
-                return new Rover(this.x, this.y, Direction.S);
-            case S:
-                return new Rover(this.x, this.y, Direction.E);
+    public Rover turnLeft() {
+        switch (this.facing) {
+            case NORTH:
+                return new Rover(this.x, this.y, Direction.WEST);
+            case WEST:
+                return new Rover(this.x, this.y, Direction.SOUTH);
+            case SOUTH:
+                return new Rover(this.x, this.y, Direction.EAST);
             default:
-                return new Rover(this.x, this.y, Direction.N);
+                return new Rover(this.x, this.y, Direction.NORTH);
         }
     }
 
-    public Rover right() {
-        switch (this.direction) {
-            case N:
-                return new Rover(this.x, this.y, Direction.E);
-            case W:
-                return new Rover(this.x, this.y, Direction.N);
-            case S:
-                return new Rover(this.x, this.y, Direction.W);
+    public Rover turnRight() {
+        switch (this.facing) {
+            case NORTH:
+                return new Rover(this.x, this.y, Direction.EAST);
+            case WEST:
+                return new Rover(this.x, this.y, Direction.NORTH);
+            case SOUTH:
+                return new Rover(this.x, this.y, Direction.WEST);
             default:
-                return new Rover(this.x, this.y, Direction.S);
+                return new Rover(this.x, this.y, Direction.SOUTH);
         }
     }
 
@@ -59,11 +59,11 @@ public class Rover {
         final Rover rover = (Rover) o;
         return x == rover.x &&
                 y == rover.y &&
-                direction == rover.direction;
+                facing == rover.facing;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y, direction);
+        return Objects.hash(x, y, facing);
     }
 }

@@ -6,74 +6,74 @@ import static org.junit.Assert.assertEquals;
 
 public class RoverTest {
     @Test
-    public void yPlusWhenForwardGivenDirectionN() {
-        final Rover result = new Rover(1, 2, Direction.N).forward();
-        assertEquals(new Rover(1, 3, Direction.N), result);
+    public void yPlusWhenForwardGivenFacingNorth() {
+        final Rover result = new Rover(1, 2, Direction.NORTH).forward();
+        assertEquals(new Rover(1, 3, Direction.NORTH), result);
     }
 
     @Test
-    public void yMinusWhenForwardGivenDirectionS() {
-        final Rover result = new Rover(1, 2, Direction.S).forward();
-        assertEquals(new Rover(1, 1, Direction.S), result);
+    public void yMinusWhenForwardGivenFacingSouth() {
+        final Rover result = new Rover(1, 2, Direction.SOUTH).forward();
+        assertEquals(new Rover(1, 1, Direction.SOUTH), result);
     }
 
     @Test
-    public void xPlusWhenForwardGivenDirectionE() {
-        final Rover result = new Rover(1, 2, Direction.E).forward();
-        assertEquals(new Rover(2, 2, Direction.E), result);
+    public void xPlusWhenForwardGivenFacingEast() {
+        final Rover result = new Rover(1, 2, Direction.EAST).forward();
+        assertEquals(new Rover(2, 2, Direction.EAST), result);
     }
 
     @Test
-    public void xMinusWhenForwardGivenDirectionW() {
-        final Rover result = new Rover(1, 2, Direction.W).forward();
-        assertEquals(new Rover(0, 2, Direction.W), result);
+    public void xMinusWhenForwardGivenFacingWest() {
+        final Rover result = new Rover(1, 2, Direction.WEST).forward();
+        assertEquals(new Rover(0, 2, Direction.WEST), result);
     }
 
     @Test
-    public void directionWWhenLeftGivenDirectionN() {
-        final Rover result = new Rover(1, 2, Direction.N).left();
-        assertEquals(new Rover(1, 2, Direction.W), result);
+    public void FacingWestWhenTurnLeftGivenFacingNorth() {
+        final Rover result = new Rover(1, 2, Direction.NORTH).turnLeft();
+        assertEquals(new Rover(1, 2, Direction.WEST), result);
     }
 
     @Test
-    public void directionSWhenLeftGivenDirectionW() {
-        final Rover result = new Rover(1, 2, Direction.W).left();
-        assertEquals(new Rover(1, 2, Direction.S), result);
+    public void FacingSouthWhenTurnLeftGivenFacingWest() {
+        final Rover result = new Rover(1, 2, Direction.WEST).turnLeft();
+        assertEquals(new Rover(1, 2, Direction.SOUTH), result);
     }
 
     @Test
-    public void directionEWhenLeftGivenDirectionS() {
-        final Rover result = new Rover(1, 2, Direction.S).left();
-        assertEquals(new Rover(1, 2, Direction.E), result);
+    public void FacingEastWhenTurnLeftGivenFacingSouth() {
+        final Rover result = new Rover(1, 2, Direction.SOUTH).turnLeft();
+        assertEquals(new Rover(1, 2, Direction.EAST), result);
     }
 
     @Test
-    public void directionNWhenLeftGivenDirectionE() {
-        final Rover result = new Rover(1, 2, Direction.E).left();
-        assertEquals(new Rover(1, 2, Direction.N), result);
+    public void FacingNorthWhenTurnLeftGivenFacingEast() {
+        final Rover result = new Rover(1, 2, Direction.EAST).turnLeft();
+        assertEquals(new Rover(1, 2, Direction.NORTH), result);
     }
 
     @Test
-    public void directionNWhenLeftGivenDirectionW() {
-        final Rover result = new Rover(1, 2, Direction.W).right();
-        assertEquals(new Rover(1, 2, Direction.N), result);
+    public void FacingNorthWhenTurnRightGivenFacingWest() {
+        final Rover result = new Rover(1, 2, Direction.WEST).turnRight();
+        assertEquals(new Rover(1, 2, Direction.NORTH), result);
     }
 
     @Test
-    public void directionWWhenLeftGivenDirectionS() {
-        final Rover result = new Rover(1, 2, Direction.S).right();
-        assertEquals(new Rover(1, 2, Direction.W), result);
+    public void FacingWestWhenTurnRightGivenFacingSouth() {
+        final Rover result = new Rover(1, 2, Direction.SOUTH).turnRight();
+        assertEquals(new Rover(1, 2, Direction.WEST), result);
     }
 
     @Test
-    public void directionSWhenLeftGivenDirectionE() {
-        final Rover result = new Rover(1, 2, Direction.E).right();
-        assertEquals(new Rover(1, 2, Direction.S), result);
+    public void FacingSouthWhenTurnRightGivenFacingEast() {
+        final Rover result = new Rover(1, 2, Direction.EAST).turnRight();
+        assertEquals(new Rover(1, 2, Direction.SOUTH), result);
     }
 
     @Test
-    public void directionEWhenLeftGivenDirectionN() {
-        final Rover result = new Rover(1, 2, Direction.N).right();
-        assertEquals(new Rover(1, 2, Direction.E), result);
+    public void FacingEastWhenTurnRightGivenFacingNorth() {
+        final Rover result = new Rover(1, 2, Direction.NORTH).turnRight();
+        assertEquals(new Rover(1, 2, Direction.EAST), result);
     }
 }
