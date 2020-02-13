@@ -26,6 +26,32 @@ public class Rover {
         }
     }
 
+    public Rover left() {
+        switch (this.direction) {
+            case N:
+                return new Rover(this.x, this.y, Direction.W);
+            case W:
+                return new Rover(this.x, this.y, Direction.S);
+            case S:
+                return new Rover(this.x, this.y, Direction.E);
+            default:
+                return new Rover(this.x, this.y, Direction.N);
+        }
+    }
+
+    public Rover right() {
+        switch (this.direction) {
+            case N:
+                return new Rover(this.x, this.y, Direction.E);
+            case W:
+                return new Rover(this.x, this.y, Direction.N);
+            case S:
+                return new Rover(this.x, this.y, Direction.W);
+            default:
+                return new Rover(this.x, this.y, Direction.S);
+        }
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
