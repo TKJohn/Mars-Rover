@@ -27,29 +27,11 @@ public class Rover {
     }
 
     public Rover turnLeft() {
-        switch (this.facing) {
-            case NORTH:
-                return new Rover(this.x, this.y, Direction.WEST);
-            case WEST:
-                return new Rover(this.x, this.y, Direction.SOUTH);
-            case SOUTH:
-                return new Rover(this.x, this.y, Direction.EAST);
-            default:
-                return new Rover(this.x, this.y, Direction.NORTH);
-        }
+        return new Rover(this.x, this.y, this.facing.left());
     }
 
     public Rover turnRight() {
-        switch (this.facing) {
-            case NORTH:
-                return new Rover(this.x, this.y, Direction.EAST);
-            case WEST:
-                return new Rover(this.x, this.y, Direction.NORTH);
-            case SOUTH:
-                return new Rover(this.x, this.y, Direction.WEST);
-            default:
-                return new Rover(this.x, this.y, Direction.SOUTH);
-        }
+        return new Rover(this.x, this.y, this.facing.right());
     }
 
     @Override
