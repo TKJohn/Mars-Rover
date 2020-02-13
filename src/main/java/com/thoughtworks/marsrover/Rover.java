@@ -1,6 +1,7 @@
 package com.thoughtworks.marsrover;
 
 import java.util.Objects;
+import java.util.function.Function;
 
 public class Rover {
     private final int x;
@@ -13,25 +14,33 @@ public class Rover {
         this.facing = facing;
     }
 
-    public Rover forward() {
-        switch (this.facing) {
+    public static Function<Rover, Rover> forward = rover -> {
+        switch (rover.getFacing()) {
             case NORTH:
-                return new Rover(this.x, this.y + 1, this.facing);
+                return new Rover(rover.getX(), rover.getY() + 1, rover.getFacing());
             case SOUTH:
-                return new Rover(this.x, this.y - 1, this.facing);
+                return new Rover(rover.getX(), rover.getY() - 1, rover.getFacing());
             case EAST:
-                return new Rover(this.x + 1, this.y, this.facing);
+                return new Rover(rover.getX() + 1, rover.getY(), rover.getFacing());
             default:
-                return new Rover(this.x - 1, this.y, this.facing);
+                return new Rover(rover.getX() - 1, rover.getY(), rover.getFacing());
         }
+    };
+
+    public static Function<Rover, Rover> turnLeft = rover -> new Rover(rover.getX(), rover.getY(), rover.getFacing().left());
+
+    public static Function<Rover, Rover> turnRight = rover -> new Rover(rover.getX(), rover.getY(), rover.getFacing().right());
+
+    public int getX() {
+        return this.x;
     }
 
-    public Rover turnLeft() {
-        return new Rover(this.x, this.y, this.facing.left());
+    public int getY() {
+        return this.y;
     }
 
-    public Rover turnRight() {
-        return new Rover(this.x, this.y, this.facing.right());
+    public Direction getFacing() {
+        return this.facing;
     }
 
     @Override
@@ -39,13 +48,13 @@ public class Rover {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final Rover rover = (Rover) o;
-        return x == rover.x &&
-                y == rover.y &&
-                facing == rover.facing;
+        return x == rover.getX() &&
+                y == rover.getY() &&
+                facing == rover.getFacing();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y, facing);
+        return Objects.hash(this.x, this.y, this.facing);
     }
 }
