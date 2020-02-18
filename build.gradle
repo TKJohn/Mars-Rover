@@ -8,5 +8,6 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
+    compile("io.vavr:vavr:0.9.3")
     testCompile("junit:junit:4.13")
 }
