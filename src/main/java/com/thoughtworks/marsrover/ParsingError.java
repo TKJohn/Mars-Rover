@@ -21,4 +21,8 @@ public class ParsingError {
     public int hashCode() {
         return Objects.hash(reason);
     }
+
+    public String getReason() {
+        return reason;
+    }
 }

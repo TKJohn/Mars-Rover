@@ -39,4 +39,13 @@ public class Rover {
     public int hashCode() {
         return Objects.hash(this.x, this.y, this.facing);
     }
+
+    @Override
+    public String toString() {
+        return "Rover{" +
+                "x=" + x +
+                ", y=" + y +
+                ", facing=" + facing +
+                '}';
+    }
 }
