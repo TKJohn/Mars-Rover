@@ -2,12 +2,12 @@ package com.thoughtworks.marsrover;
 
 import org.junit.Test;
 
-import static com.thoughtworks.marsrover.Rover.forward;
-import static com.thoughtworks.marsrover.Rover.turnLeft;
-import static com.thoughtworks.marsrover.Rover.turnRight;
+import static com.thoughtworks.marsrover.Commands.forward;
+import static com.thoughtworks.marsrover.Commands.turnLeft;
+import static com.thoughtworks.marsrover.Commands.turnRight;
 import static org.junit.Assert.assertEquals;
 
-public class RoverTest {
+public class CommandsTest {
     @Test
     public void yPlusWhenForwardGivenFacingNorth() {
         final Rover result = forward.apply(new Rover(1, 2, Direction.NORTH));

@@ -35,9 +35,9 @@ public class Parser {
     private static final Map<String, Function<Rover, Rover>> commandMap = new HashMap<>();
 
     static {
-        commandMap.put("M", Rover.forward);
-        commandMap.put("L", Rover.turnLeft);
-        commandMap.put("R", Rover.turnRight);
+        commandMap.put("M", Commands.forward);
+        commandMap.put("L", Commands.turnLeft);
+        commandMap.put("R", Commands.turnRight);
     }
 
     public static Either<ParsingError, List<Function<Rover, Rover>>> commands(final String input) {

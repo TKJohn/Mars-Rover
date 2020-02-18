@@ -8,9 +8,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
-import static com.thoughtworks.marsrover.Rover.forward;
-import static com.thoughtworks.marsrover.Rover.turnLeft;
-import static com.thoughtworks.marsrover.Rover.turnRight;
+import static com.thoughtworks.marsrover.Commands.forward;
+import static com.thoughtworks.marsrover.Commands.turnLeft;
+import static com.thoughtworks.marsrover.Commands.turnRight;
 import static org.junit.Assert.assertEquals;
 
 public class ParserTest {
