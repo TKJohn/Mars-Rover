@@ -13,11 +13,13 @@ import static com.thoughtworks.marsrover.Commands.turnLeft;
 import static com.thoughtworks.marsrover.Commands.turnRight;
 import static org.junit.Assert.assertEquals;
 
-public class ParserTest {
+public class MovementCommandParserTest {
+    private static final MovementCommandParser parser = new MovementCommandParser();
+
     @Test
-    public void shouldReturnListOfCommandsGivenCommandsString() {
+    public void shouldReturnListOfCommandsGivenMovementCommandsString() {
         final String input = "MLRLMMRRLL";
-        final Either<ParsingError, List<Function<Rover, Rover>>> result = Parser.commands(input);
+        final Either<ParsingError, List<Function<Rover, Rover>>> result = parser.apply(input);
 
         final List<Function<Rover, Rover>> expectingCommands =
                 Arrays.asList(forward, turnLeft, turnRight, turnLeft, forward, forward, turnRight, turnRight, turnLeft, turnLeft);
@@ -28,15 +30,15 @@ public class ParserTest {
     @Test
     public void shouldReturnEmptyListOfCommandsGivenEmptyString() {
         final String input = "";
-        final Either<ParsingError, List<Function<Rover, Rover>>> result = Parser.commands(input);
+        final Either<ParsingError, List<Function<Rover, Rover>>> result = parser.apply(input);
 
         assertEquals(Either.right(Collections.<Function<Rover, Rover>>emptyList()), result);
     }
 
     @Test
-    public void shouldReturnErrorGivenUnrecognizedCommand() {
+    public void shouldReturnErrorGivenUnrecognizedMovementCommand() {
         final String input = "A";
-        final Either<ParsingError, List<Function<Rover, Rover>>> result = Parser.commands(input);
+        final Either<ParsingError, List<Function<Rover, Rover>>> result = parser.apply(input);
 
         assertEquals(Either.left(new ParsingError("Unsupported command")), result);
     }

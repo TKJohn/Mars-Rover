@@ -1,7 +1,6 @@
 package com.thoughtworks.marsrover;
 
 import io.vavr.control.Either;
-import io.vavr.control.Try;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -12,16 +11,17 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class Parser {
-    private static final Map<String, Function<Rover, Rover>> commandMap = new HashMap<>();
+public class MovementCommandParser implements Function<String, Either<ParsingError, List<Function<Rover, Rover>>>> {
+    private final Map<String, Function<Rover, Rover>> commandMap = new HashMap<>();
 
-    static {
+    public MovementCommandParser() {
         commandMap.put("M", Commands.forward);
         commandMap.put("L", Commands.turnLeft);
         commandMap.put("R", Commands.turnRight);
     }
 
-    public static Either<ParsingError, List<Function<Rover, Rover>>> commands(final String input) {
+    @Override
+    public Either<ParsingError, List<Function<Rover, Rover>>> apply(final String input) {
         if (input.isEmpty()) {
             return Either.right(Collections.emptyList());
         }
