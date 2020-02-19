@@ -1,11 +1,13 @@
 package com.thoughtworks.marsrover;
 
-import io.vavr.control.Either;
-
-import java.util.List;
+import java.util.Arrays;
 import java.util.function.Function;
 
 public class CommandsExecutor implements Function<String, String> {
+
+    private static final InitCommandParser initParser = new InitCommandParser();
+    private static final MovementCommandParser movementParser = new MovementCommandParser();
+
     @Override
     public String apply(final String input) {
         final String[] split = input.split(" ");
@@ -16,11 +18,15 @@ public class CommandsExecutor implements Function<String, String> {
         final String init = split[0];
         final String movements = split.length == 2 ? split[1] : "";
 
-        final Either<ParsingError, Rover> errorOrRover = new InitCommandParser().apply(init);
-        final List<Function<Rover, Rover>> movementCommands = new MovementCommandParser().apply(movements);
+        return initParser.apply(init)
+                .map(constructMovementCommand(movements))
+                .getOrElseGet(ParsingError::getReason);
+    }
 
-        return errorOrRover
-                .map(rover -> movementCommands.stream().reduce(Function.identity(), Function::andThen).apply(rover))
-                .fold(ParsingError::getReason, Rover::toString);
+    private Function<Rover, String> constructMovementCommand(final String movements) {
+        return Arrays.stream(movements.split(""))
+                .map(movementParser)
+                .reduce(Function.identity(), Function::andThen)
+                .andThen(Commands.report);
     }
 }

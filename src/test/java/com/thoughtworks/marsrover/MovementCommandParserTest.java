@@ -2,9 +2,6 @@ package com.thoughtworks.marsrover;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.function.Function;
 
 import static com.thoughtworks.marsrover.Commands.forward;
@@ -17,31 +14,34 @@ public class MovementCommandParserTest {
     private static final MovementCommandParser parser = new MovementCommandParser();
 
     @Test
-    public void shouldReturnListOfCommandsGivenMovementCommandsString() {
-        final String input = "MLRLMMRRLL";
-        final List<Function<Rover, Rover>> result = parser.apply(input);
+    public void shouldReturnForwardCommandGivenMCommandString() {
+        final String input = "M";
+        final Function<Rover, Rover> result = parser.apply(input);
 
-        final List<Function<Rover, Rover>> expectingCommands =
-                Arrays.asList(forward, turnLeft, turnRight, turnLeft, forward, forward, turnRight, turnRight, turnLeft, turnLeft);
-
-        assertEquals(expectingCommands, result);
+        assertEquals(forward, result);
     }
 
     @Test
-    public void shouldReturnNopCommandGivenUnrecognizedMovementCommand() {
-        final String input = "MAAL";
-        final List<Function<Rover, Rover>> result = parser.apply(input);
+    public void shouldReturnTurnLeftCommandGivenLCommandString() {
+        final String input = "L";
+        final Function<Rover, Rover> result = parser.apply(input);
 
-        final List<Function<Rover, Rover>> expectingCommands = Arrays.asList(forward, nop, nop, turnLeft);
-
-        assertEquals(expectingCommands, result);
+        assertEquals(turnLeft, result);
     }
 
     @Test
-    public void shouldReturnListOfNopCommandsGivenEmptyString() {
+    public void shouldReturnTurnRightCommandGivenRCommandString() {
+        final String input = "R";
+        final Function<Rover, Rover> result = parser.apply(input);
+
+        assertEquals(turnRight, result);
+    }
+
+    @Test
+    public void shouldReturnNopCommandGivenUnrecognizedCommandString() {
         final String input = "";
-        final List<Function<Rover, Rover>> result = parser.apply(input);
+        final Function<Rover, Rover> result = parser.apply(input);
 
-        assertEquals(Collections.singletonList(nop), result);
+        assertEquals(nop, result);
     }
 }
