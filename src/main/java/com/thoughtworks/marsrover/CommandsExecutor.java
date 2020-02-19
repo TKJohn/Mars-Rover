@@ -17,12 +17,10 @@ public class CommandsExecutor implements Function<String, String> {
         final String movements = split.length == 2 ? split[1] : "";
 
         final Either<ParsingError, Rover> errorOrRover = new InitCommandParser().apply(init);
-        final Either<ParsingError, List<Function<Rover, Rover>>> errorOrMovements = new MovementCommandParser().apply(movements);
+        final List<Function<Rover, Rover>> movementCommands = new MovementCommandParser().apply(movements);
 
-        return errorOrRover.flatMap(
-                rover -> errorOrMovements
-                        .map(movementsList -> movementsList.stream().reduce(Function.identity(), Function::andThen))
-                        .map(composedMovements -> composedMovements.apply(rover)))
+        return errorOrRover
+                .map(rover -> movementCommands.stream().reduce(Function.identity(), Function::andThen).apply(rover))
                 .fold(ParsingError::getReason, Rover::toString);
     }
 }

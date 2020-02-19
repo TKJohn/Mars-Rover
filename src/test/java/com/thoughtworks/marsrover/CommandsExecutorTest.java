@@ -32,11 +32,11 @@ public class CommandsExecutorTest {
     }
 
     @Test
-    public void shouldReportErrorGivenInvalidMovementCommand() {
-        final String input = "1,0,N MXYZMRMMRM";
+    public void shouldReportFinalStateGivenInvalidMovementCommand() {
+        final String input = "1,0,N MXYZLMRMMRM";
         final String result = executor.apply(input);
 
-        assertEquals("Unsupported command", result);
+        assertEquals("Rover{x=1, y=3, facing=EAST}", result);
     }
 
     @Test

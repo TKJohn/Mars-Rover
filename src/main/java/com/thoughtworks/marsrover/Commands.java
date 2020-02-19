@@ -17,4 +17,6 @@ public class Commands {
     };
     public static Function<Rover, Rover> turnLeft = rover -> new Rover(rover.getX(), rover.getY(), rover.getFacing().left());
     public static Function<Rover, Rover> turnRight = rover -> new Rover(rover.getX(), rover.getY(), rover.getFacing().right());
+
+    public static Function<Rover, Rover> nop = Function.identity();
 }
