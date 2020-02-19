@@ -14,4 +14,36 @@ public class CommandsExecutorTest {
 
         assertEquals("Rover{x=0, y=3, facing=EAST}", result);
     }
+
+    @Test
+    public void shouldReportRoverFinalStateGivenNoMovementCommand() {
+        final String input = "0,0,N";
+        final String result = executor.apply(input);
+
+        assertEquals("Rover{x=0, y=0, facing=NORTH}", result);
+    }
+
+    @Test
+    public void shouldReportErrorGivenInvalidInitCommand() {
+        final String input = "A,0,N MLMRMMRM";
+        final String result = executor.apply(input);
+
+        assertEquals("X should be int", result);
+    }
+
+    @Test
+    public void shouldReportErrorGivenInvalidMovementCommand() {
+        final String input = "1,0,N MXYZMRMMRM";
+        final String result = executor.apply(input);
+
+        assertEquals("Unsupported command", result);
+    }
+
+    @Test
+    public void shouldReportErrorGivenInputStringWithMultipleSections() {
+        final String input = "1,0,N MMRMMRM 1,0,S";
+        final String result = executor.apply(input);
+
+        assertEquals("Too much input commands", result);
+    }
 }

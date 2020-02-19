@@ -9,8 +9,12 @@ public class CommandsExecutor implements Function<String, String> {
     @Override
     public String apply(final String input) {
         final String[] split = input.split(" ");
+        if (split.length > 2) {
+            return "Too much input commands";
+        }
+
         final String init = split[0];
-        final String movements = split[1];
+        final String movements = split.length == 2 ? split[1] : "";
 
         final Either<ParsingError, Rover> errorOrRover = new InitCommandParser().apply(init);
         final Either<ParsingError, List<Function<Rover, Rover>>> errorOrMovements = new MovementCommandParser().apply(movements);
